@@ -1,9 +1,11 @@
 {
-  "name": "hain-plugin-chrome-bookmarks",
-  "description": "",
+  "name": "@ewnd9/hain-plugin-chrome-bookmarks",
+  "description": "Chrome bookmarks plugin for hain launcher",
   "version": "0.0.0",
   "main": "dist/index.js",
-  "dependencies": {},
+  "dependencies": {
+    "chokidar": "^1.4.3"
+  },
   "devDependencies": {
     "ava": "^0.13.0",
     "babel-cli": "~6.6.0",

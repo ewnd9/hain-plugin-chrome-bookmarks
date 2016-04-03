@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/ewnd9/hain-plugin-chrome-bookmarks.svg?branch=master)](https://travis-ci.org/ewnd9/hain-plugin-chrome-bookmarks)
 
+Chrome bookmarks plugin for hain launcher
+
 ## Install
 
 ```
