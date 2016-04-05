@@ -1,32 +1,20 @@
 'use strict';
 
-import path from 'path';
-import fs from 'fs';
-import chokidar from 'chokidar';
+import { watch } from './chrome-bookmarks';
 
-module.exports = ({ app, shell, matchutil }) => {
-  const bookmarksPath = process.platform === 'linux' ?
-    path.join(process.env.HOME, '.config', 'google-chrome', 'Default', 'Bookmarks') :
-    path.join(process.env.LOCALAPPDATA, 'Google', 'Chrome', 'User Data', 'Default', 'Bookmarks');
+module.exports = ({ app, shell, logger, matchutil }) => {
 
   let bookmarks;
 
-  function loadBookmarks() {
-    fs.readFile(bookmarksPath, 'utf-8', (err, content) => {
-      const data = JSON.parse(content);
-
-      bookmarks = Object.keys(data.roots).reduce((total, key) => {
-        return total.concat(data.roots[key] && data.roots[key].children || []);
-      }, []);
-    });
-  };
-
   function startup() {
-    loadBookmarks();
+    watch(function watchBookmarks(err, result) {
+      if (err) {
+        logger.log(`error: ${err.stack}`);
+        return;
+      }
 
-    chokidar
-      .watch(bookmarksPath, { usePolling: true })
-      .on('change', () => loadBookmarks())
+      bookmarks = result;
+    });
   };
 
   function search(query, res) {
