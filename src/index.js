@@ -25,8 +25,8 @@ module.exports = ({ app, shell, logger, matchutil }) => {
     const result = bookmarks.find(_ => _.name === id);
 
     if (result) {
-      shell.openExternal(result.url);
       app.close();
+      shell.openExternal(result.url);
     }
   };
 
